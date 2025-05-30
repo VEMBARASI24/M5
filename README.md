@@ -162,29 +162,40 @@ Write C program for the below pyramid string pattern. Enter a string: PROGRAM En
 
 int main() {
     char str[100];
-    int rows, i, j, len;
-    printf("Enter a string: ");
     scanf("%s", str);
 
-    printf("Enter number of rows: ");
-    scanf("%d", &rows);
+    int len = strlen(str);
+    int sp = 5;  // Adjusted for proper pyramid spacing
+    int k = 0;
+    int y = 0;
 
-    len = strlen(str);
-    for (i = 1; i <= rows; i++) {
-        for (j = 0; j < i; j++) {
-            printf("%c ", str[j % len]); 
+    for (int i = 1; i <= 5; i++) {
+        for (int space = 1; space <= sp; space++) {
+            printf(" ");
+        }
+        for (int j = 0; j <= y; j++) {
+            printf("%c", str[k]);
+            k++;
+            if (str[k] == '\0') {
+                k = 0;
+            }
         }
         printf("\n");
+        sp--;  // Decrease spacing for pyramid effect
+        y += 2;
     }
 
     return 0;
 }
 
+
+
    
 
 ```
 ## OUTPUT:
-![image](https://github.com/user-attachments/assets/96143b7d-7858-4436-b4a4-3ecd3f5ff03f)
+![image](https://github.com/user-attachments/assets/3cb0153f-daf9-42ed-b778-c63082db550d)
+
 
 
 
