@@ -14,18 +14,24 @@ Write a C program to convert a 23.65 into 25 using pointer
 ## PROGRAM:
 ```
 #include <stdio.h>
+
 int main() {
-    float num = 23.65;
-    float *ptr = &num;
-    printf("Original number: %.2f\n", *ptr);
+    double num = 23.65;
+    double *ptr;
+    
+    ptr = &num;
+    
     *ptr = 25.0;
-    printf("Modified number: %.2f\n", *ptr);
+    
+    printf("Modified value: %.2f\n", num);
+    
     return 0;
 }
 ```
 
 ## OUTPUT:
-![Screenshot 2025-05-05 134925](https://github.com/user-attachments/assets/5d23cb82-0387-49d0-8e31-54b0b7adaabb)
+![image](https://github.com/user-attachments/assets/d93d42a9-67b5-4722-aee1-27ea1cf43442)
+
 
 ## RESULT:
 Thus the program to convert a 23.65 into 25 using pointer has been executed successfully.
@@ -51,23 +57,28 @@ Write a C program to calculate the Product of first 12 natural numbers using Rec
 ## PROGRAM:
 ```
 #include <stdio.h>
-unsigned long long product(int n) {
-    if (n == 1) {
+
+unsigned long long calculateProduct(int n) {
+    if (n == 1)
         return 1;
-    } else {
-        return n * product(n - 1);
-    }
+    else
+        return n * calculateProduct(n - 1);
 }
+
 int main() {
     int n = 12;
-    unsigned long long result;
-    result = product(n);
-    printf("Product of first 12 natural numbers is: %llu\n", result);
+    unsigned long long product;
+    
+    product = calculateProduct(n);
+    
+    printf("The product of the first 12 natural numbers is: %llu\n", product);
+    
     return 0;
 }
 ```
 ## OUTPUT:
-![Screenshot 2025-05-05 135015](https://github.com/user-attachments/assets/55beeafb-117e-40a1-948d-581eedd3bc46)
+![image](https://github.com/user-attachments/assets/c5810521-f7e8-4cec-a988-89e0771b5e57)
+
       		
 ## RESULT:
 
@@ -89,25 +100,33 @@ Write C Program to find Sum of each row of a Matrix
 
 ## PROGRAM:
 ```
-#include<stdio.h>
-int main()
-{
-    int m,n,i,j;
-    scanf("%d %d",&m,&n);
-    int arr[m][n];
-    for (i=0;i<m;i++){
-        for (j=0;j<n;j++){
-            scanf("%d",&arr[i][j]);
+#include <stdio.h>
+
+int main() {
+    int rows, cols, i, j, sum;
+    int matrix[10][10];
+    
+    printf("Enter number of rows: ");
+    scanf("%d", &rows);
+    
+    printf("Enter number of columns: ");
+    scanf("%d", &cols);
+    
+    printf("Enter elements of the matrix:\n");
+    for(i = 0; i < rows; i++) {
+        for(j = 0; j < cols; j++) {
+            scanf("%d", &matrix[i][j]);
         }
     }
-    printf("Sum of each row:\n");
-    for (i=0;i<m;i++){
-        int sum=0;
-        for (j=0;j<n;j++){
-            sum+=arr[i][j];
+    
+    for(i = 0; i < rows; i++) {
+        sum = 0;
+        for(j = 0; j < cols; j++) {
+            sum += matrix[i][j];
         }
-        printf("Row %d sum = %d\n",i+1,sum);
+        printf("Sum of row %d = %d\n", i + 1, sum);
     }
+    
     return 0;
 }
 ```
@@ -115,7 +134,8 @@ int main()
 
 
 ## OUTPUT
-![Screenshot 2025-05-05 135118](https://github.com/user-attachments/assets/49492cfa-cc54-4175-819c-b048bd565db7)
+![image](https://github.com/user-attachments/assets/3eb4bec9-8bed-470b-8d6f-dda4f3cde97d)
+
 
  ## RESULT
  Thus the program has been executed successfully.
@@ -142,34 +162,30 @@ Write C program for the below pyramid string pattern. Enter a string: PROGRAM En
 
 int main() {
     char str[100];
-    int num_rows, i, j, len;
-
+    int rows, i, j, len;
+    printf("Enter a string: ");
     scanf("%s", str);
-    scanf("%d", &num_rows);
+
+    printf("Enter number of rows: ");
+    scanf("%d", &rows);
 
     len = strlen(str);
-    if(num_rows > len) {
-        num_rows = len;
-    }
-
-    for(i = 1; i <= num_rows; i++) {
-        for(j = 1; j <= num_rows - i; j++) {
-            printf(" ");
-        }
-
-        for(j = 0; j < i; j++) {
-            printf("%c ", str[j]);
+    for (i = 1; i <= rows; i++) {
+        for (j = 0; j < i; j++) {
+            printf("%c ", str[j % len]); 
         }
         printf("\n");
     }
+
     return 0;
 }
 
+   
+
 ```
+## OUTPUT:
+![image](https://github.com/user-attachments/assets/96143b7d-7858-4436-b4a4-3ecd3f5ff03f)
 
-
- ## OUTPUT
-![Screenshot 2025-05-23 142637](https://github.com/user-attachments/assets/c86ae571-2142-4638-8108-07101e479ec5)
 
 
  
@@ -201,32 +217,32 @@ Step 6: End the program.
 ## PROGRAM
 ```
 #include <stdio.h>
+
 int main() {
-	int arr[10];
-	int *parr;
-	int i, n;
-
-	parr = arr;
-	scanf("%d", &n);
-
-	if (n > 10) {
-		printf("Please enter up to 10 elements only.\n");
-		return 1;
-	}
-	for(i = 0; i < n; i++) {
-		scanf("%d", (parr + i));
-	}
-	printf("The array elements are:\n");
-	for(i = 0; i < n; i++) {
-		printf("%d ", *(parr + i));
-	}
-	printf("\n");
-	return 0;
+    int i, n;
+    int arr[10];
+    int *parr = arr;
+    
+    printf("Enter number of elements (max 10): ");
+    scanf("%d", &n);
+    
+    printf("Enter %d elements:\n", n);
+    for(i = 0; i < n; i++) {
+        scanf("%d", (parr + i));
+    }
+    
+    printf("The array elements are:\n");
+    for(i = 0; i < n; i++) {
+        printf("%d ", *(parr + i));
+    }
+    
+    return 0;
 }
 ```
 
 ## OUTPUT
-![Screenshot 2025-05-05 135313](https://github.com/user-attachments/assets/3b8fedc3-3f1b-406f-b2de-d066e7d710c9)
+![image](https://github.com/user-attachments/assets/7b6a4fa3-8ca0-4a22-af14-2f4a40e6175b)
+
 
 
 ## RESULT
